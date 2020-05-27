@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" >
+    <title>How I Met Your Mother | Order</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+    <link rel="stylesheet" href="./assets/style.css" >
+</head>
+<body>
+<div class="page-content">
+    <header>
+        <h1>How I Met Your Mother</h1>
+        <nav>
+            <ul>
+                <li><a href="./">Home</a></li>
+                <li><a href="./cast.html">Cast</a></li>
+                <li><a href="./merch.html">Merchandise</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="order-content">
+        <p>Thank you for wanting to order an item from our fanshop!</p>
+        <p>Please use the form on this page to order a product</p>
+        <form
+            method="POST"
+            action="https://httpbin.org/post"
+        >
+            <label for="name">Name:
+                <input
+                    required
+                    type="text"
+                    name="name"
+                    id="name"
+                    autocomplete="name"
+                    placeholder="Ted Mosby"
+                />
+            </label>
+            <label for="email">Email:
+                <input
+                    required
+                    type="email"
+                    name="email"
+                    id="email"
+                    autocomplete="email"
+                    placeholder="t.mosby@cbs.com"
+                />
+            </label>
+            <label for="item">Item:
+                <select required name="item" id="item">
+                    <option value="" disabled selected>Select an item</option>
+                    <option value="umbrella">Yellow umbrella</option>
+                    <option value="horn">Blue French horn</option>
+                    <option value="playbook">The playbook</option>
+                    <option value="boots">Red cowboy boots</option>
+                    <option value="tie">Ducky tie</option>
+                    <option value="suit">Barney's suit</option>
+                </select>
+            </label>
+            <label for="address">Address:
+                <input
+                    required
+                    type="text"
+                    name="address"
+                    id="address"
+                    autocomplete="street-address"
+                    placeholder="Somestreet 1337"
+                />
+            </label>
+            <label for="postal">Postal/ZIP Code:
+                <input
+                    required
+                    type="text"
+                    name="postal"
+                    id="postal"
+                    autocomplete="postal-code"
+                    placeholder="1337 QP"
+                />
+            </label>
+            <label for="country">Country:
+                <input
+                    required
+                    type="text"
+                    name="country"
+                    id="country"
+                    autocomplete="country"
+                    placeholder="FR"
+                />
+            </label>
+            <label for="phone">Phone number:
+                <input
+                    type="tel"
+                    required
+                    name="phone"
+                    id="phone"
+                    autocomplete="tel"
+                    placeholder="0612345678"
+                />
+            </label>
+            <input type="submit" name="submit" value="Send" />
+        </form>
+    </main>
+    <footer>
+        <p>&copy; 2018 Wesley Klop</p>
+        <dl>
+            <dt>Sources:</dt>
+            <dd><a href="http://how-i-met-your-mother.wikia.com/wiki/How_I_Met_Your_Mother_Wiki">
+                HIMYM Wiki
+            </a></dd>
+            <dd><a href="https://en.wikipedia.org/wiki/How_I_Met_Your_Mother">Wikipedia page</a>
+            </dd>
+        </dl>
+    </footer>
+</div>
+</body>
+</html>
