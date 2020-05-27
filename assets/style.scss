@@ -1,0 +1,384 @@
+$theme-color: #fa0;
+$background-color: #fefefe;
+$text-color-dark: rgba(0, 0, 0, 0.78);
+$text-color-light: rgba(255, 255, 255, 0.78);
+$text-color-accent: rgba(0, 0, 0, 0.54);
+$max-paragraph-width: 560px;
+$footer-background-color: #eee;
+$text-font:  "Alegreya Sans", sans-serif;
+$header-font: "Merriweather", serif;
+
+@import url("https://fonts.googleapis.com/css?family=Alegreya+Sans|Merriweather");
+
+@function min-content-height($footer-height, $header-height: 156px) {
+  @return calc(100vh - #{$header-height} - #{$footer-height});
+}
+
+body {
+  margin: 0;
+  line-height: 1.6;
+  font-size: 16px;
+  font-family: $text-font;
+  color: $text-color-dark;
+  background-color: $background-color;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $header-font;
+}
+
+.spoiler-warning {
+  color: #d93025;
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  font-weight: bolder;
+}
+
+.page-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto auto;
+  grid-template-areas: "header" "main" "footer";
+}
+
+header {
+  $nav-item-height: 32px;
+  grid-area: header;
+  background-color: $theme-color;
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: column nowrap;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+  z-index: 1;
+
+  h1 {
+    margin: 0;
+    font-size: 1.75rem;
+    padding: 0 8px;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 8px 0;
+    text-transform: uppercase;
+  }
+
+  a {
+    text-decoration: none;
+    color: $text-color-dark;
+    height: $nav-item-height;
+    display: block;
+    line-height: $nav-item-height;
+    padding: 0 8px;
+  }
+
+  li.active {
+    background-color: rgba(0, 0, 0, 0.12);
+  }
+}
+
+main {
+  grid-area: main;
+  box-sizing: border-box;
+  padding: 8px 0;
+  // Calculate min-height from 100vh - header-height - footer-height
+  min-height: min-content-height(180px);
+  background: linear-gradient(to bottom, $background-color, $background-color 95%, $footer-background-color 100%);
+
+  &.index-content {
+    padding: 0;
+    :not(:first-child) {
+      padding: 0 8px;
+    }
+  }
+
+  .home-banner {
+    width: 100%;
+    max-width: 850px;
+    margin: auto;
+    display: block;
+  }
+
+  p {
+    max-width: $max-paragraph-width;
+    margin: 8px auto;
+  }
+}
+
+footer {
+  grid-area: footer;
+  background-color: $footer-background-color;
+  box-sizing: border-box;
+  padding: 8px;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+
+  a {
+    color: $theme-color;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  main {
+    min-height: min-content-height(123px);
+  }
+  footer {
+    flex-direction: row;
+  }
+}
+
+.cast-content {
+  padding: 8px 8px 16px;
+
+  .cast-item {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: auto auto auto auto;
+    grid-template-areas: "image image" "charname charname" "actorname actorname" "description description";
+    justify-items: center;
+    grid-gap: 16px;
+    padding: 16px;
+    box-sizing: border-box;
+    max-width: $max-paragraph-width + 32px;
+    margin: auto;
+    border-radius: 2px;
+
+    img {
+      grid-area: image;
+      $image-diameter: 96px;
+      width: $image-diameter;
+      height: $image-diameter;
+      border-radius: 50%;
+    }
+
+    h3 {
+      grid-area: charname;
+      margin: 0;
+    }
+
+    p {
+      grid-area: description;
+    }
+
+    .actor-name {
+      grid-area: actorname;
+      color: $text-color-accent;
+    }
+
+    + .cast-item {
+      margin-top: 16px;
+    }
+  }
+}
+
+.merch-content {
+  padding: 8px;
+}
+
+.merch-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  grid-gap: 16px;
+  margin: auto;
+
+  .merch-item {
+    $max-size: 300px;
+    display: flex;
+    flex-flow: column nowrap;
+    position: relative;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    border-radius: 2px;
+    min-width: $max-size;
+    height: $max-size;
+    margin: auto;
+    cursor: pointer;
+
+    &:hover .merch-item__price {
+      box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+      transform: rotate(10deg) scale(1.1);
+    }
+
+    &__title {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 8px;
+      color: #fff;
+      margin: 0;
+      background-color: rgba(0,0,0,.54);
+      font-family: $text-font;
+      border-bottom-left-radius: 2px;
+      border-bottom-right-radius: 2px;
+    }
+
+    &__img {
+      order: 1;
+      background: #000;
+      max-width: $max-size;
+      max-height: $max-size;
+      border-radius: 2px;
+    }
+
+    &__price {
+      $price-size: 52px;
+      position: absolute;
+      right: 16px;
+      top: 16px;
+      display: block;
+      border-radius: 50%;
+      background: $theme-color;
+      width: $price-size;
+      height: $price-size;
+      line-height: $price-size;
+      text-align: center;
+      transform: rotate(20deg);
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+      will-change: transform, box-shadow;
+      transition: all 250ms ease;
+
+      &::before {
+        content: '€';
+      }
+    }
+
+    &__description {
+      order: 3;
+    }
+  }
+}
+
+.order-content {
+  $row-height: 32px;
+  padding: 8px;
+
+ &  > * {
+   margin: auto;
+    max-width: $max-paragraph-width;
+  }
+
+  form {
+    display: flex;
+    flex-flow: column nowrap;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    padding: 16px;
+    margin-top: 16px;
+  }
+
+  label {
+    margin-bottom: 8px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    line-height: $row-height;
+  }
+
+  input, select {
+    height: $row-height;
+    line-height: $row-height - 4px;
+    border: none;
+    border-radius: 2px;
+    font-size: 16px;
+    min-width: 200px;
+    padding: 2px;
+    box-sizing: border-box;
+  }
+
+  input[type="submit"] {
+    background-color: $theme-color;
+    text-transform: uppercase;
+  }
+}
+
+@media only screen and (min-width: 648px) {
+  .merch-container {
+    grid-template-columns: 1fr 1fr;
+
+    h2 {
+      grid-column-start: 1;
+      grid-column-end: 3;
+    }
+  }
+}
+
+@media only screen and (min-width: 948px) {
+  .merch-container {
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 932px;
+
+    h2 {
+      grid-column-start: 1;
+      grid-column-end: 4;
+    }
+  }
+}
+
+@media only screen and (min-width: 850px) {
+  header {
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    nav {
+      padding: 0 32px;
+      ul {
+        padding: 0;
+      }
+      li {
+        display: inline-block;
+
+        &::after {
+          content: "";
+          display: block;
+          height: 2px;
+          background-color: $text-color-dark;
+          width: 100%;
+          transform-origin: center;
+          transform: scaleX(0);
+          transition: transform 250ms ease;
+        }
+
+        &.active::after,
+        &:hover::after {
+          transform: scaleX(1);
+        }
+      }
+    }
+
+    a {
+      $nav-item-height: 44px;
+      height: $nav-item-height;
+      line-height: $nav-item-height + 2px;
+      min-width: $nav-item-height * 1.5;
+      text-align: center;
+    }
+  }
+  main {
+    min-height: min-content-height(123px, 46px);
+    .home-banner {
+      margin: 16px auto;
+    }
+  }
+
+  .cast-content .cast-item {
+    $image-diameter: 200px;
+    grid-template-areas: "image description" "charname description" "actorname description" ". description";
+    max-width: $max-paragraph-width + $image-diameter + 32px;
+
+    img {
+      width: $image-diameter;
+      height: $image-diameter;
+    }
+  }
+
+  .order-content input, .order-content select {
+    min-width: 350px;
+  }
+}
